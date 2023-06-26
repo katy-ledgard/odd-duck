@@ -8,7 +8,7 @@ const image3 = document.querySelector("section img:last-child");
 const resultsButton = document.querySelector("section + div");
 
 let clicks = 0;
-const maxClicksAllowed = 5;
+const maxClicksAllowed = 25;
 
 let allProducts = [];
 

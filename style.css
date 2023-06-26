@@ -59,7 +59,7 @@ padding-bottom: .6em;
 }
 /* section + div will target the div that immediately follows a section */
 section + div {
-    background-color: darkgrey;
+    background-color: rgb(100, 100, 100);
     color: lightgrey;
     padding: .5rem 1rem;
     width: max-content;

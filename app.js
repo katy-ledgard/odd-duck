@@ -5,6 +5,10 @@ const productContainer = document.querySelector("section");
 const image1 = document.querySelector("section img:first-child");
 const image2 = document.querySelector("section img:nth-child(2)");
 const image3 = document.querySelector("section img:last-child");
+const resultsButton = document.querySelector("section + div");
+
+let clicks = 0;
+const maxClicksAllowed = 5;
 
 let allProducts = [];
 
@@ -17,9 +21,12 @@ function getRandomProduct() {
 // create a constructor function to create an object associated with each project.
 // Properties: 1. Name of the product 2. File path of image 3. Times the image has been shown
 
+//For each of the three images, increment its property of times it has been shown by one.
+
 const Product = function(name, src){
     this.name = name;
     this.src = src;
+    this.clicks = 0;
     this.views = 0;
     allProducts.push(this);
 }
@@ -55,6 +62,47 @@ function renderProducts() {
     allProducts[product3].views++
 }
 
+function handleProductClick(event) {
+   // console.log("You have been clicked")
+
+    if (event.target === productContainer) {
+        alert("Please click on an image!")
+    } else {
+        clicks++
+        // console.log(clicks);
+        let clickedProduct = event.target.alt;
+        for (let i = 0; i < allProducts.length; i++) {
+            if (clickedProduct === allProducts[i].name) {
+                allProducts[i].clicks++;
+                break;
+            // } else {
+            //     renderProducts();
+            }
+        }
+        if (clicks === maxClicksAllowed) {
+            productContainer.removeEventListener("click", handleProductClick);
+            // productContainer.className= "no-voting";
+            resultsButton.addEventListener("click", renderResults);
+            resultsButton.className = "clicks-allowed";
+        } 
+        else {
+            renderProducts();
+        }
+        }
+    }
+
+    function renderResults() {
+        // console.log("Here are your results");
+        let ul = document.querySelector("ul");
+        for (let i = 0; i < allProducts.length; i++) {
+            let li = document.createElement("li");
+            li.textContent = `${allProducts[i].name} had ${allProducts[i].views} views and was clicked ${allProducts[i].clicks} times.`;
+            ul.appendChild(li);
+        }
+    }
+
+
+// console.log(allProducts)
 
 const bag = new Product("bag", "assets/bag.jpg");
 const banana = new Product("banana", "assets/banana.jpg");
@@ -78,3 +126,7 @@ const wineGlass = new Product("wine-glass", "assets/wine-glass.jpg");
 // console.log(bag);
 
 renderProducts();
+
+// Attach an event listener to the section of the HTML page where the images are going to be displayed.
+
+productContainer.addEventListener("click", handleProductClick);

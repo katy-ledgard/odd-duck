@@ -64,6 +64,32 @@ function renderProducts() {
     product3 = getRandomProduct();
   }
 
+  // SECOND ATTEMPT
+  // for (let i = 0; i < removeProducts.length; i++){
+  //     if (product1 === removeProducts[i]){
+  //         removeProducts.splice(product1, 1);
+  //     } else if (product2 === removeProducts[i]){
+  //         removeProducts.splice(product2, 1);
+  //     } else if (product3 === removeProducts[i]){
+  //         removeProducts.splice(product3, 1);
+  //     }
+  // }
+
+  // FIRST ATTEMPTT
+  //     let shownProducts = [];
+  //     shownProducts.push(product1);
+  //     shownProducts.push(product2);
+  //     shownProducts.push(product3);
+
+  //     for (let i = 0; i < shownProducts.length; i++) {
+  //         if (product1 === shownProducts[i]){
+  //             product1 = getRandomProduct();
+  //         } else if (product2 === shownProducts[i]){
+  //             product2 = getRandomProduct();
+  //     } else if (product3 === shownProducts[i]) {
+  //         product3 = getRandomProduct();
+  //     };
+  // }
 
   image1.src = allProducts[product1].src;
   image2.src = allProducts[product2].src;
@@ -102,6 +128,7 @@ function handleProductClick(event) {
       productContainer.removeEventListener("click", handleProductClick);
       productContainer.className = "no-voting";
       resultsButton.addEventListener("click", renderChart);
+      // resultsButton.addEventListener("click", renderPieChart);
       resultsButton.className = "clicks-allowed";
     } else {
       renderProducts();
@@ -142,7 +169,10 @@ const waterCan = new Product("water-can", "assets/water-can.jpg");
 const wineGlass = new Product("wine-glass", "assets/wine-glass.jpg");
 // console.log(bag);
 
-
+// ALTERNATE OPTION TO SAVE WRITING OUT NAMES AND URLS:
+// for (let i = 0; i < productNames.length; i++) {
+//     new Product(productNames[i], `imgs/${productNames[i]}.jpg`);
+// }
 
 renderProducts();
 
@@ -210,4 +240,54 @@ function renderChart() {
   const myChart = new Chart(productChart, config);
 }
 
+// function renderPieChart() {
 
+//   const productNames = [];
+//   const productViews = [];
+//   const productClicks = [];
+  
+//   for (let i = 0; i < allProducts.length; i++){
+//     productNames.push(allProducts[i].name);
+//     productViews.push(allProducts[i].views);
+//     productClicks.push(allProducts[i].clicks);
+     
+//      }
+
+//   const data = {
+//     labels: productNames,
+//     datasets: [
+//       {
+//         label: "Views",
+//         data: productViews,
+//         backgroundColor: ["#B15E6C"],
+//         borderColor: [""],
+//         borderWidth: 1,
+
+//       },
+//       {
+//         label: "Clicks",
+//         data: productClicks,
+//         backgroundColor: ["#4E878C"],
+//         borderColor: ["#4E878C"],
+//         borderWidth: 1,
+
+//       },
+//     ]
+//   };
+
+ 
+//   const config = {
+//     type: "pie",
+//     data: data
+//   };
+
+//   const pieChart = document.getElementById("pie-chart");
+//   const myPieChart = new Chart(pieChart, config);
+  
+// };
+
+
+
+// renderChart()
+// console.log(removeProducts)
+// renderPieChart();

@@ -131,6 +131,11 @@ canvas {
     height: 500px;
 }
 
+#pie-chart {
+    width: 50%;
+    height: 250px;
+}
+
 footer {
     left: 0;
     bottom: 0;

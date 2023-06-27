@@ -9,3 +9,6 @@ Lighthouse Report, attempt 1:
 Lighthouse Report, attempt 2 (*after editing the get results button*):
 
 ![Second Lighthouse Report](assets/Lab%2011_%20Odd%20Duck%20Projects%20and%201%20more%20page%20-%20Personal%20-%20Microsoft%E2%80%8B%20Edge%2026_06_2023%2016_35_37.png)
+
+## image credit: 
+Image by <a href="https://pixabay.com/users/clker-free-vector-images-3736/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=30875">Clker-Free-Vector-Images</a> from <a href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=30875">Pixabay</a>

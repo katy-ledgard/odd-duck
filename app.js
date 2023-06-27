@@ -16,7 +16,7 @@ let removeProducts = [];
 // Create an algorithm that will randomly generate three unique product images from the images directory and display them side-by-side-by-side in the browser window.
 
 function getRandomProduct() {
-    return Math.floor(Math.random() * removeProducts.length);
+    return Math.floor(Math.random() * allProducts.length);
 }
 
 // create a constructor function to create an object associated with each project.
@@ -118,7 +118,7 @@ function handleProductClick(event) {
         }
         if (clicks === maxClicksAllowed) {
             productContainer.removeEventListener("click", handleProductClick);
-            // productContainer.className= "no-voting";
+            productContainer.className= "no-voting";
             resultsButton.addEventListener("click", renderChart);
             resultsButton.className = "clicks-allowed";
         } 
@@ -208,16 +208,16 @@ const data = {
         label: "Views",
         data: productViews,
         // colors are stored in an array (do not forget to use camel casing)
-        backgroundColor: ["rosybrown"],
-        borderColor: ["darkgrey"],
+        backgroundColor: ["#B15E6C"],
+        borderColor: ["#4E878C"],
         borderWidth: 1,
 
     }, 
     {
         label: "Clicks",
         data: productClicks,
-        backgroundColor: ["darkgrey"],
-        borderColor: ["rosybrown"],
+        backgroundColor: ["#4E878C"],
+        borderColor: ["#B15E6C"],
         borderWidth: 1,
     }
 

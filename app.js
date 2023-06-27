@@ -60,6 +60,7 @@ function renderProducts() {
     // } else if (product2 === product3) {
     //   product3 = getRandomProduct();
     // }
+    product1 = getRandomProduct();
     product2 = getRandomProduct();
     product3 = getRandomProduct();
   }
@@ -208,6 +209,4 @@ function renderChart() {
 
   //create new instance of chart - pass in variable for getting canvas element and config of chart
   const myChart = new Chart(productChart, config);
-}
-
-
+};

@@ -8,14 +8,15 @@ const image3 = document.querySelector("section img:last-child");
 const resultsButton = document.querySelector("section + div");
 
 let clicks = 0;
-const maxClicksAllowed = 25;
+const maxClicksAllowed = 5;
 
 let allProducts = [];
+let removeProducts = [];
 
 // Create an algorithm that will randomly generate three unique product images from the images directory and display them side-by-side-by-side in the browser window.
 
 function getRandomProduct() {
-    return Math.floor(Math.random() * allProducts.length);
+    return Math.floor(Math.random() * removeProducts.length);
 }
 
 // create a constructor function to create an object associated with each project.
@@ -24,19 +25,25 @@ function getRandomProduct() {
 //For each of the three images, increment its property of times it has been shown by one.
 
 const Product = function(name, src){
+
     this.name = name;
     this.src = src;
     this.clicks = 0;
     this.views = 0;
     allProducts.push(this);
+    removeProducts.push(this);
 }
 
 // Create an algorithm that will randomly generate three unique product images from the images directory and display them side-by-side-by-side in the browser window.
 
 function renderProducts() {
+
+ //create new array of all products
+
     let product1 = getRandomProduct();
     let product2 = getRandomProduct();
     let product3 = getRandomProduct();
+
 
     // use while loop to stop images repeating
 
@@ -49,6 +56,36 @@ function renderProducts() {
           product3 = getRandomProduct();  
         }
     }
+
+
+    // SECOND ATTEMPT
+    // for (let i = 0; i < removeProducts.length; i++){
+    //     if (product1 === removeProducts[i]){
+    //         removeProducts.splice(removeProducts[i], product1);
+    //     } else if (product2 === removeProducts[i]){
+    //         removeProducts.splice(removeProducts[i], product2);
+    //     } else if (product3 === removeProducts[i]){
+    //         removeProducts.splice(removeProducts[i], product3);
+    //     }
+    // }
+
+
+    // FIRST ATTEMPTT
+//     let shownProducts = [];
+//     shownProducts.push(product1);
+//     shownProducts.push(product2);
+//     shownProducts.push(product3);
+
+//     for (let i = 0; i < shownProducts.length; i++) {
+//         if (product1 === shownProducts[i]){
+//             product1 = getRandomProduct();
+//         } else if (product2 === shownProducts[i]){
+//             product2 = getRandomProduct();
+//     } else if (product3 === shownProducts[i]) {
+//         product3 = getRandomProduct();
+//     };
+// }
+
 
     image1.src= allProducts[product1].src;
     image2.src= allProducts[product2].src;
@@ -82,7 +119,7 @@ function handleProductClick(event) {
         if (clicks === maxClicksAllowed) {
             productContainer.removeEventListener("click", handleProductClick);
             // productContainer.className= "no-voting";
-            resultsButton.addEventListener("click", renderResults);
+            resultsButton.addEventListener("click", renderChart);
             resultsButton.className = "clicks-allowed";
         } 
         else {
@@ -125,8 +162,81 @@ const waterCan = new Product("water-can", "assets/water-can.jpg");
 const wineGlass = new Product("wine-glass", "assets/wine-glass.jpg");
 // console.log(bag);
 
+
+// ALTERNATE OPTION TO SAVE WRITING OUT NAMES AND URLS:
+// for (let i = 0; i < productNames.length; i++) {
+//     new Product(productNames[i], `imgs/${productNames[i]}.jpg`);
+// }
+
+
 renderProducts();
 
 // Attach an event listener to the section of the HTML page where the images are going to be displayed.
 
 productContainer.addEventListener("click", handleProductClick);
+
+// create render chart function
+
+function renderChart() {
+// decalre names and data (views and clicks) and put in an array
+
+const productNames = [];
+const productViews = [];
+const productClicks = [];
+
+// make a for loop to push product names, views and clicks into the arrays.
+
+for (let i = 0; i < allProducts.length; i++) {
+    productNames.push (allProducts[i].name);
+    productViews.push (allProducts[i].views);
+    productClicks.push (allProducts[i].clicks);
+
+}
+
+//check code is working in console.log
+// console.log(productNames);
+// console.log(productViews);
+// console.log(productClicks);
+
+// declare data variable for chart
+
+const data = {
+    labels: productNames,
+    // can do multiple data sets inside {}, {} seperated with a comma
+    datasets: [ 
+        {
+        label: "Views",
+        data: productViews,
+        // colors are stored in an array (do not forget to use camel casing)
+        backgroundColor: ["rosybrown"],
+        borderColor: ["darkgrey"],
+        borderWidth: 1,
+
+    }, 
+    {
+        label: "Clicks",
+        data: productClicks,
+        backgroundColor: ["darkgrey"],
+        borderColor: ["rosybrown"],
+        borderWidth: 1,
+    }
+
+    ]
+};
+
+// declare config variable
+
+const config = {
+    type: "bar",
+    data: data, /*Using data variable as declared above*/
+};
+
+// use getElementbyId to select the canvas element
+const productChart = document.getElementById("chart");
+
+//create new instance of chart - pass in variable for getting canvas element and config of chart
+const myChart = new Chart(productChart, config);
+}
+
+// renderChart()
+console.log(removeProducts)

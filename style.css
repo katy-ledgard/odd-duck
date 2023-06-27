@@ -90,6 +90,11 @@ section + div {
     padding: 2rem auto;
 }
 
+canvas {
+    width: 65%;
+    height: 500px;
+}
+
 footer {
     left: 0;
     bottom: 0;

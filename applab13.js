@@ -79,7 +79,7 @@ function renderProducts() {
 
   usedProducts = [];
   usedProducts.push(product1, product2, product3);
-  console.log(usedProducts);
+//   console.log(usedProducts);
 }
 
 function handleProductClick(event) {
@@ -94,6 +94,10 @@ function handleProductClick(event) {
     for (let i = 0; i < allProducts.length; i++) {
       if (clickedProduct === allProducts[i].name) {
         allProducts[i].clicks++;
+        // saveProducts();
+        // JSON.stringify(allProducts[i]);
+    //   localStorage.setItem("allProducts[i]", allProducts[i]);
+    //   console.log(allProducts[i])
         break;
         // } else {
         //     renderProducts();
@@ -104,6 +108,8 @@ function handleProductClick(event) {
       productContainer.className = "no-voting";
       resultsButton.addEventListener("click", renderChart);
       resultsButton.className = "clicks-allowed";
+      
+
     } else {
       renderProducts();
     }
@@ -141,7 +147,7 @@ function renderResults() {
 // const unicorn = new Product("unicorn", "assets/unicorn.jpg");
 // const waterCan = new Product("water-can", "assets/water-can.jpg");
 // const wineGlass = new Product("wine-glass", "assets/wine-glass.jpg");
-// // console.log(bag);
+// console.log(bag);
 
 
 
@@ -209,27 +215,32 @@ function renderChart() {
 
   //create new instance of chart - pass in variable for getting canvas element and config of chart
   const myChart = new Chart(productChart, config);
+
+  //
   saveProducts();
+ 
 };
 
-function saveProducts() {
+//make a function to store the products array in local storage as a formatted JSON string
 
-  localStorage.setItem("allProducts", JSON.stringify(allProducts))
-  // console.log(allProducts);
+function saveProducts() {
+    // let productList = JSON.stringify(allProducts);
+    localStorage.setItem("allProducts", JSON.stringify(allProducts))
+    // console.log(allProducts);
 }
 
-
+//make a function to retrieve the products array from local storage and then utilize the JSON.Parse() function
 
 function getProducts() {
-  const storedProducts = JSON.parse(localStorage.getItem("allProducts"))
-  // console.log(storedProducts)
-  if (storedProducts) {
-      allProducts = storedProducts;
+    const storedProducts = JSON.parse(localStorage.getItem("allProducts"))
+    // console.log(storedProducts)
+    if (storedProducts) {
+        allProducts = storedProducts;
 
-      
-  } else {
-      // console.log("new products needed")
-const bag = new Product("bag", "assets/bag.jpg");
+        // comment out the new instances and place in the else part of if statement
+    } else {
+        // console.log("new products needed")
+ const bag = new Product("bag", "assets/bag.jpg");
 const banana = new Product("banana", "assets/banana.jpg");
 const bathroom = new Product("bathroom", "assets/bathroom.jpg");
 const boots = new Product("boots", "assets/boots.jpg");
@@ -248,9 +259,11 @@ const tauntaun = new Product("tauntaun", "assets/tauntaun.jpg");
 const unicorn = new Product("unicorn", "assets/unicorn.jpg");
 const waterCan = new Product("water-can", "assets/water-can.jpg");
 const wineGlass = new Product("wine-glass", "assets/wine-glass.jpg");
-  }
+    }
 
 }
+
+// invoke the checkLocalStorage()
 
 getProducts();
 renderProducts();
